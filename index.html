@@ -6,210 +6,300 @@
     <title>[PLACEHOLDER: BROWSER TAB TITLE]</title>
     
     <style>
-        /* CSS STYLES - This controls how the website looks */
-        
-        /* General Reset */
+        /* --- CSS VARIABLES (Easy Theme Changing) --- */
+        :root {
+            --bg-body: #0f0f12;       /* Very dark blue-black */
+            --bg-card: #1a1a1f;       /* Slightly lighter for boxes */
+            --text-main: #e0e0e0;     /* White-ish grey for text */
+            --text-muted: #a0a0a0;    /* Grey for secondary text */
+            --accent: #8c52ff;        /* Purple accent */
+            --accent-glow: #00d4ff;   /* Blue glow */
+            --gradient: linear-gradient(90deg, #8c52ff 0%, #00d4ff 100%);
+        }
+
+        /* --- GLOBAL RESET --- */
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth; /* Smooth scrolling when clicking links */
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f4f4f4;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif; /* Modern font stack */
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.7;
+            overflow-x: hidden;
         }
 
-        /* Header Navigation */
-        header {
-            background-color: #2c3e50; /* Change color here */
-            color: #fff;
-            padding: 1rem 0;
-            text-align: center;
+        /* --- NAVIGATION BAR --- */
+        nav {
+            position: fixed; /* Sticks to top */
+            top: 0;
+            width: 100%;
+            background: rgba(15, 15, 18, 0.95); /* Semi-transparent */
+            backdrop-filter: blur(10px); /* Blur effect behind nav */
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
-        header h1 {
-            margin-bottom: 10px;
+        nav .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent; /* Gradient text */
         }
 
         nav ul {
             list-style: none;
-            padding: 0;
-        }
-
-        nav ul li {
-            display: inline;
-            margin: 0 15px;
+            display: flex;
+            gap: 20px;
         }
 
         nav a {
-            color: #fff;
+            color: var(--text-main);
             text-decoration: none;
-            font-weight: bold;
-            font-size: 1.1rem;
+            font-weight: 500;
+            transition: color 0.3s;
         }
 
         nav a:hover {
-            text-decoration: underline;
+            color: var(--accent-glow);
         }
 
-        /* Hero Section (The big banner) */
-        .hero {
-            background-color: #34495e; /* Change color here */
-            color: #fff;
-            padding: 60px 20px;
+        /* --- HERO SECTION (Top Banner) --- */
+        header.hero {
+            height: 100vh; /* Full screen height */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
+            padding: 20px;
+            background: radial-gradient(circle at center, rgba(140, 82, 255, 0.15) 0%, rgba(15, 15, 18, 0) 70%);
         }
 
-        .hero h2 {
-            font-size: 2.5rem;
+        h1 {
+            font-size: 4rem;
             margin-bottom: 20px;
+            line-height: 1.1;
         }
 
-        /* Main Container */
-        .container {
-            max-width: 1100px;
-            margin: 20px auto;
-            padding: 0 20px;
-            background: white;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            overflow: hidden; /* Clear floats */
+        .gradient-text {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
+        p.subtitle {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--gradient);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(140, 82, 255, 0.4);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 212, 255, 0.5);
+        }
+
+        /* --- SECTIONS & CARDS --- */
         section {
+            padding: 100px 10%;
+            min-height: 80vh; /* Gives sections some height */
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            border-left: 5px solid var(--accent);
+            padding-left: 20px;
+        }
+
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background-color: var(--bg-card);
             padding: 30px;
-            border-bottom: 1px solid #eee;
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: transform 0.3s;
         }
 
-        section h3 {
-            color: #2c3e50;
-            margin-bottom: 15px;
-            font-size: 1.8rem;
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(140, 82, 255, 0.3);
         }
 
-        /* Image Placeholders */
-        .image-placeholder {
+        .image-box {
             width: 100%;
-            height: 300px;
-            background-color: #ddd;
+            height: 200px;
+            background-color: #2a2a30;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 20px;
-            color: #666;
+            color: #555;
             font-weight: bold;
-            border: 2px dashed #999;
+            margin-bottom: 20px;
+            border: 2px dashed #444;
         }
 
-        /* Footer */
+        /* --- ANIMATIONS (Fade In on Scroll) --- */
+        .hidden {
+            opacity: 0;
+            transform: translateY(30px); /* Move down slightly */
+            transition: all 0.8s ease-out;
+        }
+
+        .show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- FOOTER --- */
         footer {
-            background-color: #2c3e50;
-            color: #fff;
             text-align: center;
-            padding: 20px;
-            margin-top: 20px;
+            padding: 50px;
+            background-color: #050505;
+            color: var(--text-muted);
+            border-top: 1px solid #222;
         }
 
-        /* Responsive Design */
+        /* --- MOBILE TWEAKS --- */
         @media (max-width: 768px) {
-            nav ul li {
-                display: block;
-                margin: 10px 0;
-            }
+            h1 { font-size: 2.5rem; }
+            nav ul { display: none; } /* Simplified mobile view */
+            nav { justify-content: center; }
         }
     </style>
 </head>
 <body>
 
-    <!-- HEADER SECTION -->
-    <header>
-        <div class="container" style="background: transparent; box-shadow: none;">
-            <h1>[PLACEHOLDER: PROJECT MAIN TITLE]</h1>
-            <nav>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#details">Project Details</a></li>
-                    <li><a href="#sources">Sources</a></li>
-                </ul>
-            </nav>
-        </div>
+    <!-- NAVIGATION -->
+    <nav>
+        <div class="logo">[PLACEHOLDER: PROJECT NAME]</div>
+        <ul>
+            <li><a href="#intro">Introduction</a></li>
+            <li><a href="#details">Details</a></li>
+            <li><a href="#conclusion">Conclusion</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header class="hero">
+        <!-- 'hidden' class triggers the animation script below -->
+        <h1 class="gradient-text hidden">[PLACEHOLDER: BIG CATCHY TITLE]</h1>
+        <p class="subtitle hidden">[PLACEHOLDER: A short, modern tagline describing your school project topic.]</p>
+        <a href="#intro" class="btn hidden">Explore Project</a>
     </header>
 
-    <!-- HERO SECTION (Welcome Banner) -->
-    <section id="home" class="hero">
-        <h2>[PLACEHOLDER: CATCHY HEADLINE]</h2>
-        <p>[PLACEHOLDER: A short sentence describing what this project is about.]</p>
+    <!-- SECTION 1: INTRODUCTION -->
+    <section id="intro">
+        <div class="hidden">
+            <h2>Introduction</h2>
+            <div class="image-box">[PLACEHOLDER: MAIN IMAGE HERE]</div>
+            <p>
+                [PLACEHOLDER: This is your opening paragraph. Because of the "hidden" class on the parent div, this entire section will fade in smoothly as you scroll down to it. Write about why you chose this topic here.]
+            </p>
+            <br>
+            <p>
+                [PLACEHOLDER: Add more background information here. The dark theme makes long text easier to read for the user.]
+            </p>
+        </div>
     </section>
 
-    <!-- MAIN CONTENT AREA -->
-    <main class="container">
+    <!-- SECTION 2: DETAILS (CARDS) -->
+    <section id="details">
+        <h2 class="hidden">[PLACEHOLDER: KEY POINTS]</h2>
+        
+        <div class="card-container">
+            <!-- CARD 1 -->
+            <div class="card hidden">
+                <h3>[PLACEHOLDER: POINT 1]</h3>
+                <br>
+                <p>[PLACEHOLDER: Explain your first major point here. This box will hover when the mouse moves over it.]</p>
+            </div>
 
-        <!-- SECTION 1: INTRODUCTION/ABOUT -->
-        <section id="about">
-            <h3>Introduction</h3>
-            <!-- Replace this div with an actual <img> tag later if you have one -->
-            <div class="image-placeholder">[PLACEHOLDER: OPTIONAL IMAGE HERE]</div>
-            
+            <!-- CARD 2 -->
+            <div class="card hidden" style="transition-delay: 100ms;">
+                <h3>[PLACEHOLDER: POINT 2]</h3>
+                <br>
+                <p>[PLACEHOLDER: Explain your second major point here. The transition delay makes this card appear slightly after the first one.]</p>
+            </div>
+
+            <!-- CARD 3 -->
+            <div class="card hidden" style="transition-delay: 200ms;">
+                <h3>[PLACEHOLDER: POINT 3]</h3>
+                <br>
+                <p>[PLACEHOLDER: Explain your third major point here. Add facts, data, or interesting details.]</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: CONCLUSION -->
+    <section id="conclusion">
+        <div class="hidden">
+            <h2>Conclusion</h2>
             <p>
-                [PLACEHOLDER: Write your introduction here. Explain why you chose this topic and what the viewer is about to learn. Keep it interesting!]
+                [PLACEHOLDER: Wrap up your project here. Summarize the most important things you learned. The animations help keep the user engaged until the very end.]
             </p>
             <br>
-            <p>
-                [PLACEHOLDER: Additional paragraph text goes here. You can describe the history or the background of your subject.]
-            </p>
-        </section>
-
-        <!-- SECTION 2: MAIN DETAILS -->
-        <section id="details">
-            <h3>[PLACEHOLDER: MAIN TOPIC HEADING]</h3>
-            
-            <h4>[PLACEHOLDER: Sub-Point 1]</h4>
-            <p>
-                [PLACEHOLDER: Detailed information about your first main point goes here. This is the "meat" of your project.]
-            </p>
-            <br>
-            
-            <h4>[PLACEHOLDER: Sub-Point 2]</h4>
-            <p>
-                [PLACEHOLDER: Detailed information about your second main point goes here. Make sure to check your spelling!]
-            </p>
-            
-            <ul>
-                <li>[PLACEHOLDER: Important Fact 1]</li>
-                <li>[PLACEHOLDER: Important Fact 2]</li>
-                <li>[PLACEHOLDER: Important Fact 3]</li>
+            <h3>Sources</h3>
+            <ul style="margin-left: 20px; color: var(--text-muted);">
+                <li>[PLACEHOLDER: Source citation 1]</li>
+                <li>[PLACEHOLDER: Source citation 2]</li>
             </ul>
-        </section>
-
-        <!-- SECTION 3: CONCLUSION -->
-        <section id="conclusion">
-            <h3>Conclusion</h3>
-            <p>
-                [PLACEHOLDER: Summarize what you learned. What is the most important takeaway from this project?]
-            </p>
-        </section>
-
-        <!-- SECTION 4: SOURCES/BIBLIOGRAPHY -->
-        <section id="sources">
-            <h3>Bibliography / Sources</h3>
-            <p>The following sources were used to create this project:</p>
-            <ul>
-                <li>[PLACEHOLDER: Author Name. "Article Title." Website Name. URL.]</li>
-                <li>[PLACEHOLDER: Author Name. "Article Title." Website Name. URL.]</li>
-                <li>[PLACEHOLDER: Image Source Credits]</li>
-            </ul>
-        </section>
-
-    </main>
+        </div>
+    </section>
 
     <!-- FOOTER -->
     <footer>
-        <p>Project created by: <strong>[PLACEHOLDER: YOUR NAME]</strong></p>
-        <p>Class: [PLACEHOLDER: CLASS NAME] | Date: [PLACEHOLDER: DATE]</p>
+        <p>Created by <span style="color: var(--accent);">[PLACEHOLDER: YOUR NAME]</span></p>
+        <p>[PLACEHOLDER: CLASS / DATE]</p>
     </footer>
+
+    <!-- JAVASCRIPT FOR SCROLL ANIMATIONS -->
+    <script>
+        // This script watches for elements with the "hidden" class.
+        // When they scroll into view, it adds the "show" class to trigger the CSS animation.
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                console.log(entry)
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                }
+            });
+        });
+
+        const hiddenElements = document.querySelectorAll('.hidden');
+        hiddenElements.forEach((el) => observer.observe(el));
+    </script>
 
 </body>
 </html>
